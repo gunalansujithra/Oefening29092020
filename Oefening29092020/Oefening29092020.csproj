@@ -126,6 +126,9 @@
     <Compile Include="Uitgeverijen.cs">
       <DependentUpon>BoekenDataModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddAuteurs.resx">
+      <DependentUpon>AddAuteurs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DisplayBoeken.resx">
       <DependentUpon>DisplayBoeken.cs</DependentUpon>
     </EmbeddedResource>
