@@ -20,7 +20,7 @@ namespace Oefening29092020
 
         private void DisplayBoeken_Load(object sender, EventArgs e)
         {
-            using(BoekenEntities ctx = new BoekenEntities())
+            using(BoekenEntities1 ctx = new BoekenEntities1())
             {
                 var boekenQuery = ctx.Boekens.Select(x => x);
 
@@ -48,46 +48,57 @@ namespace Oefening29092020
         {
             int boekId = Convert.ToInt32(lbName.SelectedValue);
 
-            using (BoekenEntities ctx = new BoekenEntities())
+            using (BoekenEntities1 ctx = new BoekenEntities1())
             {
-                Boeken selectedBoek = ctx.Boekens.Where(b => b.Id == boekId).FirstOrDefault();
+                //code for boeken and uitgever
+                var selectedBoek = ctx.Boekens
+                                        .Join(ctx.Uitgeverijens,
+                                            b => b.UitgeverId,
+                                            u => u.Id,
+                                            (b, u) => new { b, u }).Where(x => x.b.Id == boekId).FirstOrDefault();
 
-                Uitgeverijen selectedUitgever = ctx.Uitgeverijens.Where(u => u.Id == selectedBoek.UitgeverId).FirstOrDefault();
+                lblTitle.Text = selectedBoek.b.Titel;
+                lblUitgever.Text = selectedBoek.u.Naam;
+                lblPublicatie.Text = selectedBoek.b.Publicatie.ToString();
+                lblScore.Text = selectedBoek.b.Score.ToString();
+                lblAantalPaginas.Text = selectedBoek.b.AantalPaginas.ToString();
 
-                var selectedGenre = ctx.BoekenGenres.Where(bg => bg.BoekId == boekId)
+                //code for Genre
+                var selectedGenre = ctx.BoekenGenres
                                         .Join(ctx.Genres,
                                             g => g.GenreId,
                                             bg1 => bg1.Id,
-                                            (g, bg1) => new { g, bg1 });
+                                            (g, bg1) => new { g, bg1, Genre = bg1.Genre1 }).Where(x => x.g.BoekId == boekId).ToList();
 
-                var selectedActeur = ctx.BoekenAuteurs.Where(ba => ba.BoekId == boekId)
-                                       .Join(ctx.Auteurs,
-                                           ba1 => ba1.AuteurId,
-                                           a => a.Id,
-                                           (ba1, a) => new { ba1, a });
+                lbGenre.DisplayMember = "Genre";
+                lbGenre.DataSource = selectedGenre;
 
-                lblTitle.Text = selectedBoek.Titel;
-
-                string auter = "";
+                //code to display genre in label
                 string genre = "";
-
-                foreach (var item in selectedActeur)
-                {
-                    auter += item.a.Voornaam + " " + item.a.Achternaam + ", ";
-                }
-
                 foreach (var item in selectedGenre)
                 {
                     genre += item.bg1.Genre1 + ", ";
                 }
-
-                lblActuer.Text = auter.Substring(0, auter.Length - 2);
                 lblGenre.Text = genre.Substring(0, genre.Length - 2);
-                lblUitgever.Text = selectedUitgever.Naam;
-                lblPublicatie.Text = selectedBoek.Publicatie.ToString();
-                lblScore.Text = selectedBoek.Score.ToString();
-                lblAantalPaginas.Text = selectedBoek.AantalPaginas.ToString();
 
+                //code for auteurs
+                var selectedActeur = ctx.BoekenAuteurs.Where(ba => ba.BoekId == boekId)
+                                       .Join(ctx.Auteurs,
+                                           ba1 => ba1.AuteurId,
+                                           a => a.Id,
+                                           (ba1, a) => new { ba1, a, Auteurs = a.Voornaam + " " + a.Achternaam }).ToList();
+
+                lbAuteurs.DisplayMember = "Auteurs";
+                lbAuteurs.DataSource = selectedActeur;
+
+                //code to display auters in label
+                string auter = "";
+                foreach (var item in selectedActeur)
+                {
+                    auter += item.a.Voornaam + " " + item.a.Achternaam + ", ";
+                }
+                lblActuer.Text = auter.Substring(0, auter.Length - 2);
+                
             }
         }
 

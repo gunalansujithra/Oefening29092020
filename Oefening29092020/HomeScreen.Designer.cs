@@ -33,6 +33,7 @@
             this.btnAuteurs = new System.Windows.Forms.Button();
             this.btnUitgeverijen = new System.Windows.Forms.Button();
             this.btnGenres = new System.Windows.Forms.Button();
+            this.btnEditBoeken = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBoeken
@@ -85,11 +86,22 @@
             this.btnGenres.UseVisualStyleBackColor = true;
             this.btnGenres.Click += new System.EventHandler(this.btnGenres_Click);
             // 
+            // btnEditBoeken
+            // 
+            this.btnEditBoeken.Location = new System.Drawing.Point(197, 403);
+            this.btnEditBoeken.Name = "btnEditBoeken";
+            this.btnEditBoeken.Size = new System.Drawing.Size(199, 44);
+            this.btnEditBoeken.TabIndex = 5;
+            this.btnEditBoeken.Text = "Edit / Delete Boeken";
+            this.btnEditBoeken.UseVisualStyleBackColor = true;
+            this.btnEditBoeken.Click += new System.EventHandler(this.btnEditBoeken_Click);
+            // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(587, 595);
+            this.Controls.Add(this.btnEditBoeken);
             this.Controls.Add(this.btnGenres);
             this.Controls.Add(this.btnUitgeverijen);
             this.Controls.Add(this.btnAuteurs);
@@ -108,5 +120,6 @@
         private System.Windows.Forms.Button btnAuteurs;
         private System.Windows.Forms.Button btnUitgeverijen;
         private System.Windows.Forms.Button btnGenres;
+        private System.Windows.Forms.Button btnEditBoeken;
     }
 }

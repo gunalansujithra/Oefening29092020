@@ -13,10 +13,10 @@ namespace Oefening29092020
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BoekenEntities : DbContext
+    public partial class BoekenEntities1 : DbContext
     {
-        public BoekenEntities()
-            : base("name=BoekenEntities")
+        public BoekenEntities1()
+            : base("name=BoekenEntities1")
         {
         }
     

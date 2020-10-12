@@ -36,8 +36,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="BoekId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoekId" Type="int" />
           <Property Name="GenreId" Type="int" />
         </EntityType>
         <EntityType Name="Genres">
@@ -91,7 +91,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoekenGenres_Boeken">
-          <End Role="Boeken" Type="Self.Boeken" Multiplicity="1" />
+          <End Role="Boeken" Type="Self.Boeken" Multiplicity="0..1" />
           <End Role="BoekenGenres" Type="Self.BoekenGenres" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Boeken">
@@ -184,8 +184,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="BoekId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoekId" Type="Int32" />
           <Property Name="GenreId" Type="Int32" />
           <NavigationProperty Name="Boeken" Relationship="Self.FK_BoekenGenres_Boeken" FromRole="BoekenGenres" ToRole="Boeken" />
           <NavigationProperty Name="Genre" Relationship="Self.FK_BoekenGenres_Genres" FromRole="BoekenGenres" ToRole="Genres" />
@@ -243,7 +243,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoekenGenres_Boeken">
-          <End Role="Boeken" Type="Self.Boeken" Multiplicity="1" />
+          <End Role="Boeken" Type="Self.Boeken" Multiplicity="0..1" />
           <End Role="BoekenGenres" Type="Self.BoekenGenre" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Boeken">
@@ -266,7 +266,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BoekenEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BoekenEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Auteurs" EntityType="Self.Auteur" />
           <EntitySet Name="Boekens" EntityType="Self.Boeken" />
           <EntitySet Name="BoekenAuteurs" EntityType="Self.BoekenAuteur" />
@@ -299,7 +299,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BoekenModelStoreContainer" CdmEntityContainer="BoekenEntities">
+        <EntityContainerMapping StorageEntityContainer="BoekenModelStoreContainer" CdmEntityContainer="BoekenEntities1">
           <EntitySetMapping Name="Auteurs">
             <EntityTypeMapping TypeName="BoekenModel.Auteur">
               <MappingFragment StoreEntitySet="Auteurs">

@@ -46,5 +46,11 @@ namespace Oefening29092020
             AddGenres genres = new AddGenres();
             genres.Show();
         }
+
+        private void btnEditBoeken_Click(object sender, EventArgs e)
+        {
+            EditBoeken editBoeken = new EditBoeken();
+            editBoeken.Show();
+        }
     }
 }

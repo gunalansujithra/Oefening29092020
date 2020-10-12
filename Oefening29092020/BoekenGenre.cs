@@ -15,7 +15,7 @@ namespace Oefening29092020
     public partial class BoekenGenre
     {
         public int Id { get; set; }
-        public int BoekId { get; set; }
+        public Nullable<int> BoekId { get; set; }
         public Nullable<int> GenreId { get; set; }
     
         public virtual Boeken Boeken { get; set; }
